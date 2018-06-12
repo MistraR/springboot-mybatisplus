@@ -60,8 +60,8 @@ public class MistraController {
 
     @ApiOperation("查询所有")
     @SelectAllUrl
-    public List<Mistra> selectAll(MistraVo mistraVo) {
-        return mistraService.selectAll(mistraVo);
+    public List<Mistra> selectAll() {
+        return mistraService.selectAll();
     }
 
     @ApiOperation("分页查询+条件查询")

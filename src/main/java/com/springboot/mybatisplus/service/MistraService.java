@@ -23,7 +23,7 @@ public interface MistraService {
 
     void update(Mistra mistra);
 
-    List<Mistra> selectAll(MistraVo mistraVo);
+    List<Mistra> selectAll();
 
     Page<Mistra> getPager(MistraVo mistraVo, PageCondition condition);
 

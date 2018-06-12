@@ -11,9 +11,11 @@ import com.springboot.mybatisplus.service.MistraService;
 import com.springboot.mybatisplus.util.query.PageCondition;
 import com.springboot.mybatisplus.vo.MistraVo;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,10 +38,8 @@ public class MistraServiceImpl extends ServiceImpl<MistraMapper, Mistra> impleme
     @Override
     public void save(MistraVo mistraVo) {
         Mistra mistra = new Mistra();
-        mistra.setName(mistraVo.getName());
-        mistra.setSex(mistraVo.getSex());
-        mistra.setAge(mistraVo.getAge());
-        mistraMapper.insert(mistra);
+        BeanUtils.copyProperties(mistraVo, mistra);
+        insert(mistra);
     }
 
     /**
@@ -49,7 +49,7 @@ public class MistraServiceImpl extends ServiceImpl<MistraMapper, Mistra> impleme
      */
     @Override
     public void delete(Long id) {
-        mistraMapper.deleteById(id);
+        deleteById(id);
     }
 
     /**
@@ -60,7 +60,7 @@ public class MistraServiceImpl extends ServiceImpl<MistraMapper, Mistra> impleme
      */
     @Override
     public Mistra get(Long id) {
-        return mistraMapper.selectById(id);
+        return selectById(id);
     }
 
     /**
@@ -70,19 +70,18 @@ public class MistraServiceImpl extends ServiceImpl<MistraMapper, Mistra> impleme
      */
     @Override
     public void update(Mistra mistra) {
-        mistraMapper.updateById(mistra);
+        updateById(mistra);
     }
 
     /**
-     * 条件查询
+     * 查询所有
      *
-     * @param mistraVo
      * @return
      */
     @Override
-    public List<Mistra> selectAll(MistraVo mistraVo) {
-        List<Mistra> mistraList = mistraMapper.selectList(
-                new EntityWrapper<Mistra>().eq("name", mistraVo.getName())
+    public List<Mistra> selectAll() {
+        List<Mistra> mistraList = selectList(
+                new EntityWrapper<Mistra>()
         );
         return mistraList;
     }
@@ -101,8 +100,35 @@ public class MistraServiceImpl extends ServiceImpl<MistraMapper, Mistra> impleme
         return page;
     }
 
+    /**
+     * 自定义sql
+     *
+     * @param mistraVo
+     * @return
+     */
     @Override
     public List<Mistra> customSql(MistraVo mistraVo) {
         return mistraMapper.customSql(mistraVo);
+    }
+
+    List<MistraVo> voConvertList(List<Mistra> list) {
+        if (list.size() > 0) {
+            List<MistraVo> mistraVoList = new ArrayList<>();
+            list.forEach(mistra ->
+                    mistraVoList.add(voConvert(mistra)));
+            return mistraVoList;
+        } else {
+            return null;
+        }
+    }
+
+    public MistraVo voConvert(Mistra mistra) {
+        if (mistra != null) {
+            MistraVo mistraVo = new MistraVo();
+            BeanUtils.copyProperties(mistra, mistraVo);
+            return mistraVo;
+        } else {
+            return null;
+        }
     }
 }

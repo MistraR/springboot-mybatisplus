@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Author: WangRui
  * Date: 2018/5/20
- * Describe:
+ * Describe: 一般写自定义sql才会用到，其他常用的crud在Impl里面可以直接调用IService的方法。
  */
 @Repository
 public interface MistraMapper extends BaseMapper<Mistra> {
