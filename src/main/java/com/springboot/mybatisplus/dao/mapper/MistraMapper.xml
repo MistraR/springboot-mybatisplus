@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springboot.mybatisplus.dao.MistraMapper">
+
+    <resultMap id="BaseResultMap" type="com.springboot.mybatisplus.entity.Mistra">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <result column="modifyTime" property="modifyTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id, name, sex , age,modifyTime
+    </sql>
+
+
+    <select id="customSql" parameterType="com.springboot.mybatisplus.vo.MistraVo" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM mistra
+        <where>
+            <if test="name != null and name != ''">
+                AND name LIKE CONCAT('%',#{name},'%')
+            </if>
+            <if test="sex != null and sex != ''">
+                AND sex = #{sex}
+            </if>
+            <if test="age != null and age != ''">
+                AND sex = #{age}
+            </if>
+        </where>
+    </select>
+</mapper>
