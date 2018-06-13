@@ -21,24 +21,34 @@ import javax.sql.DataSource;
 @MapperScan("com.springboot.mybatisplus.dao")
 public class MybatisPlusConfig {
 
-    @Bean(name="dataSource")
-    @ConfigurationProperties(prefix="spring.datasource")
-    public DataSource dataSource(){
+    /**
+     * 数据源
+     *
+     * @return
+     */
+    @Bean(name = "dataSource")
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource dataSource() {
         return new DruidDataSource();
     }
 
-    // 配置事物管理器
-    @Bean(name="transactionManager")
-    public DataSourceTransactionManager transactionManager(){
+    /**
+     * 事物管理器
+     *
+     * @return
+     */
+    @Bean(name = "transactionManager")
+    public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
 
     /**
      * mybatis-plus 分页插件
+     *
+     * @return
      */
-
     @Bean
-    public PaginationInterceptor paginationInterceptor(){
+    public PaginationInterceptor paginationInterceptor() {
         PaginationInterceptor page = new PaginationInterceptor();
         page.setDialectType("mysql");
         return page;
