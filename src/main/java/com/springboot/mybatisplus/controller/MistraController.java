@@ -28,7 +28,7 @@ public class MistraController {
     @Autowired
     private MistraService mistraService;
 
-    @ApiOperation("测试")
+    @ApiOperation("项目搭建成功测试")
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "Mistra---测试成功！";
@@ -70,7 +70,7 @@ public class MistraController {
         return mistraService.getPager(mistraVo, condition);
     }
 
-    @ApiOperation("自定义sql")
+    @ApiOperation("自定义sql测试")
     @GetMapping("/customSql")
     public List<Mistra> customSql(MistraVo mistraVo){
         return mistraService.customSql(mistraVo);

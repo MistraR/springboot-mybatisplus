@@ -19,6 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration {
+
     @Bean
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -30,9 +31,9 @@ public class SwaggerConfiguration {
     }
 
     private ApiInfo apiInfo() {
-        //http://localhost:8888/swagger-ui.html
+        //http://localhost:8080/swagger-ui.html
         return new ApiInfoBuilder()
-                .title("小王瑞丶")
+                .title("罗罗诺亚丶小王瑞")
                 .description("----------接口文档----------")
                 .termsOfServiceUrl("www.mistra.wang")
                 .contact(new Contact("WangRui", "", ""))

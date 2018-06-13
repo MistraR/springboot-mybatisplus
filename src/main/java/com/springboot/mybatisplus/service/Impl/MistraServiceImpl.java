@@ -88,7 +88,7 @@ public class MistraServiceImpl extends ServiceImpl<MistraMapper, Mistra> impleme
 
     /**
      * 条件查询，分页查询
-     *
+     * 分页查询时，分页插件会自动填充数据总行数和总页数
      * @param mistraVo
      * @return
      */
@@ -115,14 +115,20 @@ public class MistraServiceImpl extends ServiceImpl<MistraMapper, Mistra> impleme
         if (list.size() > 0) {
             List<MistraVo> mistraVoList = new ArrayList<>();
             list.forEach(mistra ->
-                    mistraVoList.add(voConvert(mistra)));
+                    mistraVoList.add(convertVo(mistra)));
             return mistraVoList;
         } else {
             return null;
         }
     }
 
-    public MistraVo voConvert(Mistra mistra) {
+    /**
+     * 实体类与查询类转换
+     *
+     * @param mistra
+     * @return
+     */
+    public MistraVo convertVo(Mistra mistra) {
         if (mistra != null) {
             MistraVo mistraVo = new MistraVo();
             BeanUtils.copyProperties(mistra, mistraVo);
